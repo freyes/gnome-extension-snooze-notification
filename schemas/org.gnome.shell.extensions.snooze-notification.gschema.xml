@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.snooze-notification"
+          path="/org/gnome/shell/extensions/snooze-notification/">
+    <key name="snooze-minutes" type="i">
+      <range min="1" max="120"/>
+      <default>5</default>
+      <summary>Snooze delay (minutes)</summary>
+      <description>How many minutes to wait before re-showing a snoozed notification.</description>
+    </key>
+  </schema>
+</schemalist>
