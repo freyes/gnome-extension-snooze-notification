@@ -1,0 +1,11 @@
+# Build artifacts
+*.zip
+*.shell-extension.zip
+schemas/gschemas.compiled
+locale/
+
+# Node / tooling
+node_modules/
+
+# Planning scratch (ulw-plan)
+.omo/
