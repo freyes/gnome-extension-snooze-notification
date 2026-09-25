@@ -1,3 +1,6 @@
+// Copyright (C) 2026 Felipe Reyes
+// SPDX-License-Identifier: GPL-2.0-or-later
+
 // Smoke test: proves the runner, the fakes, and the virtual clock work before
 // any product code exists.
 import { FakeScheduler } from './fakes.js';

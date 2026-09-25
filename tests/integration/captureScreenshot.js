@@ -1,3 +1,6 @@
+// Copyright (C) 2026 Felipe Reyes
+// SPDX-License-Identifier: GPL-2.0-or-later
+
 // Captures a screenshot of the extension in action (banner + Snooze button)
 // from a headless nested shell. Run with:
 //   dbus-run-session -- gnome-shell-test-tool --headless \

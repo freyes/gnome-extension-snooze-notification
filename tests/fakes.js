@@ -1,3 +1,6 @@
+// Copyright (C) 2026 Felipe Reyes
+// SPDX-License-Identifier: GPL-2.0-or-later
+
 // Test doubles for the SnoozeController unit tests.
 // Plain JavaScript only — no gi:// or resource:// imports, so this module runs
 // headless under `gjs -m` with no GNOME Shell platform present.

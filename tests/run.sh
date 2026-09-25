@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# Copyright (C) 2026 Felipe Reyes
+# SPDX-License-Identifier: GPL-2.0-or-later
+
 # Runs every tests/*.test.js under gjs and fails on any non-zero exit.
 # gjs is the GNOME JavaScript runtime that executes the extension; unit tests
 # here are plain-JS (no gi/resource imports) so they run headless.

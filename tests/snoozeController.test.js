@@ -1,3 +1,6 @@
+// Copyright (C) 2026 Felipe Reyes
+// SPDX-License-Identifier: GPL-2.0-or-later
+
 // Unit tests for the pure SnoozeController (lib/snoozeController.js).
 // Deterministic: all timing flows through FakeScheduler.advance(), never wall
 // clock, never gi:///resource:// imports.

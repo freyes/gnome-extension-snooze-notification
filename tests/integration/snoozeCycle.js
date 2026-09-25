@@ -1,3 +1,6 @@
+// Copyright (C) 2026 Felipe Reyes
+// SPDX-License-Identifier: GPL-2.0-or-later
+
 // Integration automation script for gnome-shell-test-tool. Runs inside a
 // nested GNOME Shell with the Snooze Notification extension installed+enabled
 // via `--extension`. Verifies the real banner-injection and snooze-hide path.

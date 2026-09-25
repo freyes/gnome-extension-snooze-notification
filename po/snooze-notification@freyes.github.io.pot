@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Snooze Notification extension.
+# Copyright (C) 2026 Felipe Reyes
+# This file is distributed under the same license as the snooze-notification package.
+# Felipe Reyes <freyes@tty.cl>, 2026.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-25 11:54-0300\n"
+"Project-Id-Version: snooze-notification 1.0\n"
+"Report-Msgid-Bugs-To: freyes@tty.cl\n"
+"POT-Creation-Date: 2026-09-25 13:33-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,26 +17,26 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: prefs.js:17
+#: prefs.js:18
 msgid "General"
 msgstr ""
 
-#: prefs.js:23 lib/snoozeButton.js:26
+#: prefs.js:24 lib/snoozeButton.js:27
 msgid "Snooze"
 msgstr ""
 
-#: prefs.js:24
+#: prefs.js:25
 msgid "Configure the snooze delay for notifications."
 msgstr ""
 
-#: prefs.js:29
+#: prefs.js:30
 msgid "Snooze delay (minutes)"
 msgstr ""
 
-#: prefs.js:30
+#: prefs.js:31
 msgid "How long to wait before re-showing a snoozed notification."
 msgstr ""
 
-#: lib/snoozeButton.js:30
+#: lib/snoozeButton.js:31
 msgid "Snooze notification"
 msgstr ""

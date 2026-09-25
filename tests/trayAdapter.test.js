@@ -1,3 +1,6 @@
+// Copyright (C) 2026 Felipe Reyes
+// SPDX-License-Identifier: GPL-2.0-or-later
+
 // Unit tests for TrayAdapter (lib/trayAdapter.js) against a fake MessageTray.
 // Deterministically locks the exact state-machine drive and the decline-aware
 // re-show check without needing a live GNOME Shell.
