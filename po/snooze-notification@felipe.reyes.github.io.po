@@ -1,0 +1,42 @@
+# English translations for PACKAGE package.
+# Copyright (C) 2026 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Automatically generated, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-25 11:54-0300\n"
+"PO-Revision-Date: 2026-09-25 11:54-0300\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ASCII\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: prefs.js:17
+msgid "General"
+msgstr "General"
+
+#: prefs.js:23 lib/snoozeButton.js:26
+msgid "Snooze"
+msgstr "Snooze"
+
+#: prefs.js:24
+msgid "Configure the snooze delay for notifications."
+msgstr "Configure the snooze delay for notifications."
+
+#: prefs.js:29
+msgid "Snooze delay (minutes)"
+msgstr "Snooze delay (minutes)"
+
+#: prefs.js:30
+msgid "How long to wait before re-showing a snoozed notification."
+msgstr "How long to wait before re-showing a snoozed notification."
+
+#: lib/snoozeButton.js:30
+msgid "Snooze notification"
+msgstr "Snooze notification"
