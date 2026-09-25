@@ -1,0 +1,9 @@
+{
+  "uuid": "snooze-notification@felipe.reyes.github.io",
+  "name": "Snooze Notification",
+  "description": "Adds a Snooze button to every notification popup. Clicking it hides the notification and re-shows it after a configurable delay.",
+  "shell-version": ["50"],
+  "url": "https://github.com/felipe.reyes/gnome-extension-snooze-notification",
+  "gettext-domain": "snooze-notification@felipe.reyes.github.io",
+  "settings-schema": "org.gnome.shell.extensions.snooze-notification"
+}
