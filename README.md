@@ -22,15 +22,15 @@ From a checkout (live development):
 
 ```bash
 ln -s "$(pwd)" \
-  ~/.local/share/gnome-shell/extensions/snooze-notification@felipe.reyes.github.io
-gnome-extensions enable snooze-notification@felipe.reyes.github.io
+  ~/.local/share/gnome-shell/extensions/snooze-notification@freyes.github.io
+gnome-extensions enable snooze-notification@freyes.github.io
 ```
 
 On Wayland you must re-login (or restart the shell) for the extension to be
 picked up after installation. Alternatively, install from the packed zip:
 
 ```bash
-gnome-extensions install snooze-notification@felipe.reyes.github.io.shell-extension.zip
+gnome-extensions install snooze-notification@freyes.github.io.shell-extension.zip
 ```
 
 ## Configure
@@ -38,7 +38,7 @@ gnome-extensions install snooze-notification@felipe.reyes.github.io.shell-extens
 Open the extension's preferences:
 
 ```bash
-gnome-extensions prefs snooze-notification@felipe.reyes.github.io
+gnome-extensions prefs snooze-notification@freyes.github.io
 ```
 
 Set **Snooze delay (minutes)** between 1 and 120 (default 5).
@@ -55,13 +55,9 @@ Set **Snooze delay (minutes)** between 1 and 120 (default 5).
 
 ## Project identifiers
 
-- UUID: `snooze-notification@felipe.reyes.github.io`
+- UUID: `snooze-notification@freyes.github.io`
 - Settings schema: `org.gnome.shell.extensions.snooze-notification`
-- Gettext domain: `snooze-notification@felipe.reyes.github.io`
-
-> Before submitting to extensions.gnome.org, replace `felipe.reyes.github.io`
-> with your own GitHub username or a domain you control (a single
-> `git grep -l` change across `metadata.json`, `schemas/`, and `po/`).
+- Gettext domain: `snooze-notification@freyes.github.io`
 
 ## Development
 
@@ -71,7 +67,7 @@ Set **Snooze delay (minutes)** between 1 and 120 (default 5).
 
 # Integration test (runs a nested headless shell)
 dbus-run-session -- gnome-shell-test-tool --headless \
-  --extension snooze-notification@felipe.reyes.github.io.shell-extension.zip \
+  --extension snooze-notification@freyes.github.io.shell-extension.zip \
   tests/integration/snoozeCycle.js
 
 # Package for extensions.gnome.org
