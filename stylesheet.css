@@ -1,0 +1,13 @@
+/* Snooze Notification button styling. Kept minimal so the button inherits the
+   active shell theme's colors while remaining visually distinct and tappable. */
+
+.notification-snooze-button {
+  padding: 4px 10px;
+  margin: 4px;
+  border-radius: 6px;
+}
+
+.notification-snooze-button:hover,
+.notification-snooze-button:focus {
+  background-color: rgba(255, 255, 255, 0.08);
+}
