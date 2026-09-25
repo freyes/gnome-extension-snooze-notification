@@ -28,6 +28,14 @@ function findSnoozeButton(banner) {
 export function init() {}
 
 export async function run() {
+  // Clear any pre-existing notifications. CI shells can surface system
+  // notifications (e.g. "Account Action Required") that would otherwise block
+  // the banner queue ahead of ours.
+  for (const source of Main.messageTray.getSources()) {
+    for (const n of [...source.notifications])
+      n.destroy();
+  }
+
   // A non-resident, non-transient notification (snoozable).
   const source = new MessageTray.Source({
     title: 'Snooze test',
@@ -46,13 +54,23 @@ export async function run() {
   });
   source.addNotification(notification);
 
-  // Wait for the banner to appear.
-  let banner = null;
-  for (let i = 0; i < 50 && !banner; i++) {
+  // Wait for OUR notification to be the one showing, dismissing any other
+  // notification that surfaces meanwhile.
+  for (let i = 0; i < 100; i++) {
     await Scripting.sleep(100);
-    banner = Main.messageTray._banner;
+    const showing = Main.messageTray._notification;
+    if (showing === notification)
+      break;
+    if (showing)
+      showing.destroy();
   }
-  assert(banner !== null, 'banner appeared for the notification');
+
+  assert(
+    Main.messageTray._notification === notification,
+    'our notification is showing',
+  );
+  const banner = Main.messageTray._banner;
+  assert(banner !== null, 'banner present for our notification');
   assert(banner.notification === notification, 'banner belongs to our notification');
 
   const button = findSnoozeButton(banner);
