@@ -1,0 +1,38 @@
+name: Integration
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+  workflow_dispatch:
+
+jobs:
+  integration:
+    name: Integration test (GNOME Shell 50)
+    runs-on: ubuntu-26.04
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install GNOME Shell and test dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            gnome-shell dbus libgl1-mesa-dri
+
+      - name: Pack extension
+        run: gnome-extensions pack --force --podir=po --extra-source=lib .
+
+      - name: Run integration test
+        env:
+          # Force Mesa software rendering (llvmpipe); the runner has no GPU.
+          LIBGL_ALWAYS_SOFTWARE: "1"
+          # Mutter creates its Wayland socket in $XDG_RUNTIME_DIR, which CI
+          # does not set up by default.
+          XDG_RUNTIME_DIR: /tmp/xdg-runtime
+        run: |
+          mkdir -p "$XDG_RUNTIME_DIR"
+          chmod 700 "$XDG_RUNTIME_DIR"
+          dbus-run-session -- gnome-shell-test-tool --headless \
+            --extension snooze-notification@freyes.github.io.shell-extension.zip \
+            tests/integration/snoozeCycle.js
