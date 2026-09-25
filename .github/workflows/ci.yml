@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+jobs:
+  test:
+    name: Unit tests & static checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install GJS and GLib tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gjs libglib2.0-bin
+
+      - name: Run unit tests
+        run: bash tests/run.sh
+
+      - name: Validate metadata.json
+        run: |
+          python3 -c "import json; m = json.load(open('metadata.json')); \
+            assert m['shell-version'] == ['50'], 'shell-version must be [\"50\"]'; \
+            assert 'version' not in m, 'version key is deprecated'; \
+            assert 'session-modes' not in m, 'session-modes must be absent'; \
+            assert m['settings-schema'] == 'org.gnome.shell.extensions.snooze-notification'"
+
+      - name: Compile GSettings schema
+        run: glib-compile-schemas --strict schemas/
+
+      - name: Check controller purity (no gi/resource imports)
+        run: |
+          if grep -rn "gi://\|resource://" lib/snoozeController.js; then
+            echo "::error::snoozeController.js must stay free of gi:// and resource:// imports"
+            exit 1
+          fi
