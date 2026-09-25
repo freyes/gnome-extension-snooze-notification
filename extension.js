@@ -23,7 +23,7 @@ export default class SnoozeNotificationExtension extends Extension {
     // fires during MessageTray._showNotification()'s _bannerBin.add_child()
     // (messageTray.js:1143), i.e. before the banner's y-offset is computed
     // (messageTray.js:1146) — so the injected button does not glitch the slide-in.
-    this._bannerChildId = Main.messageTray._bannerBin.connect(
+    this._bannerChildId = Main.messageTray._bannerBin.connect( // mt:745 (_bannerBin)
       'child-added',
       (_bin, child) => {
         if (child.notification && !child.notification.resident)
