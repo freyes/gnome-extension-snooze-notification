@@ -1,0 +1,38 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build and publish release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install GNOME Shell tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends gnome-shell gettext
+
+      - name: Pack extension
+        run: gnome-extensions pack --force --podir=po --extra-source=lib .
+
+      - name: Verify artifact
+        run: |
+          test -f snooze-notification@freyes.github.io.shell-extension.zip
+          unzip -l snooze-notification@freyes.github.io.shell-extension.zip
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${{ github.ref_name }}" \
+            --generate-notes \
+            snooze-notification@freyes.github.io.shell-extension.zip
