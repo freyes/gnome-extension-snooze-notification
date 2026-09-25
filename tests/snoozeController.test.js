@@ -15,10 +15,10 @@ function assert(cond, msg) {
   if (!cond) throw new Error(`assertion failed: ${msg}`);
 }
 
-function harness() {
+function harness(onReshow) {
   const scheduler = new FakeScheduler();
   const adapter = new FakeTrayAdapter();
-  const controller = new SnoozeController({ trayAdapter: adapter, scheduler });
+  const controller = new SnoozeController({ trayAdapter: adapter, scheduler, onReshow });
   return { scheduler, adapter, controller };
 }
 
@@ -172,6 +172,74 @@ const M = 60;
   assert(adapter.reshowCalls === 1, 'reshow attempted once');
   assert(n.acknowledged === true, 'acknowledged restored on decline');
   assert(controller.isSnoozed(n) === false, 'snooze cleared on decline');
+}
+
+// (l) onReshow callback fires on successful re-show with the notification.
+{
+  let called = null;
+  const { scheduler, controller } = harness((n) => { called = n; });
+  const n = new FakeNotification();
+  controller.snooze(n, 5);
+
+  scheduler.advance(5 * M);
+
+  assert(called === n, 'onReshow called with the notification');
+  assert(controller.isSnoozed(n) === false, 'snooze cleared');
+}
+
+// (m) onReshow is NOT called when the re-show is declined (DND blocks it).
+{
+  let called = false;
+  const { scheduler, adapter, controller } = harness(() => { called = true; });
+  adapter._showResult = false;
+  const n = new FakeNotification();
+  controller.snooze(n, 5);
+
+  scheduler.advance(5 * M);
+
+  assert(called === false, 'onReshow not called when re-show declined');
+}
+
+// (n) onReshow is NOT called on cancel().
+{
+  let called = false;
+  const { controller } = harness(() => { called = true; });
+  const n = new FakeNotification();
+  controller.snooze(n, 5);
+
+  controller.cancel(n);
+
+  assert(called === false, 'onReshow not called on cancel');
+}
+
+// (o) onReshow is NOT called when the notification is destroyed externally.
+{
+  let called = false;
+  const { controller } = harness(() => { called = true; });
+  const n = new FakeNotification();
+  controller.snooze(n, 5);
+
+  n.emitDestroy();
+
+  assert(called === false, 'onReshow not called on external destroy');
+}
+
+// (p) two concurrent snoozes each trigger onReshow for their own notification.
+{
+  const calls = [];
+  const { scheduler, controller } = harness((n) => { calls.push(n); });
+  const a = new FakeNotification();
+  const b = new FakeNotification();
+  controller.snooze(a, 5);
+  controller.snooze(b, 10);
+
+  scheduler.advance(5 * M);
+  assert(calls.length === 1, 'first onReshow fired');
+  assert(calls[0] === a, 'first onReshow received notification a');
+
+  scheduler.advance(5 * M);
+  assert(calls.length === 2, 'second onReshow fired');
+  assert(calls[1] === b, 'second onReshow received notification b');
 }
 
 console.log('snoozeController.test.js: PASS');

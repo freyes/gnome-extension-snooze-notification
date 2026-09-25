@@ -16,6 +16,10 @@ export default class SnoozeNotificationExtension extends Extension {
     this._controller = new SnoozeController({
       trayAdapter: new TrayAdapter(Main.messageTray),
       scheduler: new GLibScheduler(),
+      onReshow: (_notification) => {
+        if (this._settings.get_boolean('play-sound'))
+          this._playSound();
+      },
     });
 
     this._snoozeButtons = [];
@@ -41,6 +45,18 @@ export default class SnoozeNotificationExtension extends Extension {
       () => this._settings.get_int('snooze-minutes'),
     );
     this._snoozeButtons.push(button);
+  }
+
+  _playSound() {
+    try {
+      global.display.get_sound_player().play_from_theme(
+        'message-new-instant',
+        'Snooze expired',
+        null,
+      );
+    } catch (e) {
+      // Sound is optional — never break the main flow.
+    }
   }
 
   disable() {

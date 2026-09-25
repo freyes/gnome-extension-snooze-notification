@@ -8,5 +8,10 @@
       <summary>Snooze delay (minutes)</summary>
       <description>How many minutes to wait before re-showing a snoozed notification.</description>
     </key>
+    <key name="play-sound" type="b">
+      <default>false</default>
+      <summary>Play sound on re-show</summary>
+      <description>Whether to play a sound when a snoozed notification re-appears.</description>
+    </key>
   </schema>
 </schemalist>

@@ -44,5 +44,25 @@ export default class SnoozeNotificationPreferences extends ExtensionPreferences 
       'value',
       Gio.SettingsBindFlags.DEFAULT,
     );
+
+    // --- Sound ---
+    const soundGroup = new Adw.PreferencesGroup({
+      title: _('Sound'),
+      description: _('Play a sound when a snoozed notification re-appears.'),
+    });
+    page.add(soundGroup);
+
+    const soundRow = new Adw.SwitchRow({
+      title: _('Play sound on re-show'),
+      subtitle: _('Plays the standard system message sound.'),
+    });
+    soundGroup.add(soundRow);
+
+    window._settings.bind(
+      'play-sound',
+      soundRow,
+      'active',
+      Gio.SettingsBindFlags.DEFAULT,
+    );
   }
 }
